@@ -2,10 +2,10 @@ import typer
 import string
 
 
-def get_allowed_chars(numbers: bool, symbols: bool):
+def get_allowed_chars(digits: bool, symbols: bool):
     allowed_chars = string.ascii_letters
 
-    if numbers:
+    if digits:
         allowed_chars += string.digits
     
     if symbols:
