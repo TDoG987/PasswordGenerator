@@ -10,7 +10,7 @@ def get_allowed_chars(digits: bool, symbols: bool) -> str:
         allowed_chars += string.digits
     
     if symbols:
-        allowed_chars += "! @ # $ % ^ & * ( ) _ -"
+        allowed_chars += "!@#$%^&*()_-"
     
     return allowed_chars
 
@@ -23,9 +23,14 @@ def generate_password(length: int, allowed_chars: str) -> str:
     
     return password
 
-def main(digits: bool = False, symbols: bool = False):
+def main(length: int, digits: bool = False, symbols: bool = False):
     """Makes a random password with given flags"""
-    pass
+
+    allowed_chars = get_allowed_chars(digits, symbols)
+
+    password = generate_password(length, allowed_chars)
+
+    print(f"Password: {password}")
 
 
 if __name__ == '__main__':
