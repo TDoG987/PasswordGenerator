@@ -24,6 +24,20 @@ def generate_password(length: int, allowed_chars: str) -> str:
     return password
 
 
+def save_password(key: str, password: str, file_path: str) -> None:
+    with open(file_path, "r") as file:
+        try:
+            data = file.read()
+
+        except FileNotFoundError:
+            data = ""
+
+    data += f"{key}: {password}\n"
+
+    with open(file_path, "w") as file:
+        file.write(data)
+
+
 def main(length: int, digits: bool = False, symbols: bool = False):
     """Makes a random password with given flags"""
 
@@ -32,6 +46,9 @@ def main(length: int, digits: bool = False, symbols: bool = False):
     password = generate_password(length, allowed_chars)
 
     print(f"Password: {password}")
+
+    if input("Do you want to save password (y/n): ").lower() == 'y':
+        save_password(input("Key: "), password, input("File path: "))
 
 
 if __name__ == '__main__':
