@@ -1,6 +1,7 @@
 import typer
 import string
 import random
+import pyperclip
 
 
 def get_allowed_chars(digits: bool, symbols: bool) -> str:
@@ -38,6 +39,10 @@ def save_password(key: str, password: str, file_path: str) -> None:
         file.write(data)
 
 
+def copy_password_to_clipboard(password: str) -> None:
+    pyperclip.copy(password)
+
+
 def main(length: int, digits: bool = False, symbols: bool = False):
     """Makes a random password with given flags"""
 
@@ -47,7 +52,10 @@ def main(length: int, digits: bool = False, symbols: bool = False):
 
     print(f"Password: {password}")
 
-    if input("Do you want to save password (y/n): ").lower() == 'y':
+    if input("Do you want to copy password to clipboard (y/n): ").lower() == "y":
+        copy_password_to_clipboard(password)
+
+    if input("Do you want to save password (y/n): ").lower() == "y":
         save_password(input("Key: "), password, input("File path: "))
 
 
